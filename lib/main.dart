@@ -15,22 +15,24 @@ class MyApp extends StatelessWidget {
         ),
         body: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            if (constraints.maxWidth>600){
+            if (constraints.maxWidth > 600) {
               double cardWidth = constraints.maxWidth / 2 - 24;
-            double cardHeight = constraints.maxHeight / 2 - 24;
-            return GridView.count(
-              crossAxisCount: 2,
-              childAspectRatio: cardWidth / cardHeight,
-              mainAxisSpacing: 10.0,
-              crossAxisSpacing: 10.0,
-              children: <Widget>[
-                buildTile(context, 'Sales', Icons.attach_money, Colors.green),
-                buildTile(context, 'Stocks', Icons.inventory, Colors.blue),
-                buildTile(context, 'Parties', Icons.group, Colors.orange),
-                buildTile(context, 'Reports', Icons.receipt_long, Colors.purple),
-      ],
-    );
-            }else{
+              double cardHeight = constraints.maxHeight / 2 - 24;
+              return GridView.count(
+                crossAxisCount: 2,
+                childAspectRatio: cardWidth / cardHeight,
+                mainAxisSpacing: 10.0,
+                crossAxisSpacing: 10.0,
+                children: <Widget>[
+                  buildTile(context, 'Sales', Icons.attach_money, Colors.green),
+                  buildTile(context, 'Stocks', Icons.inventory, Colors.blue),
+                  buildTile(
+                      context, 'Add Products', Icons.note_add, Colors.orange),
+                  buildTile(
+                      context, 'Reports', Icons.receipt_long, Colors.purple),
+                ],
+              );
+            } else {
               return GridView.count(
                 crossAxisCount: 1,
                 childAspectRatio: 5,
@@ -41,20 +43,26 @@ class MyApp extends StatelessWidget {
                   buildTile(context, 'Sales', Icons.attach_money, Colors.green),
                   buildTile(context, 'Stocks', Icons.inventory, Colors.blue),
                   buildTile(context, 'Parties', Icons.group, Colors.orange),
-                  buildTile(context, 'Reports', Icons.receipt_long, Colors.purple),
+                  buildTile(
+                      context, 'Reports', Icons.receipt_long, Colors.purple),
                 ],
               );
             }
-            
-  },
-),
+          },
+        ),
+        floatingActionButton: settingsButton(),
       ),
     );
   }
 
-  Widget buildTile(BuildContext context, String title, IconData icon, Color color) {
+  Widget settingsButton() => FloatingActionButton(
+      child: Icon(Icons.settings),
+      onPressed: () {
+        print("settings are pressed");
+      });
+  Widget buildTile(
+      BuildContext context, String title, IconData icon, Color color) {
     return Card(
-      
       elevation: 2.0,
       color: color,
       child: InkWell(
